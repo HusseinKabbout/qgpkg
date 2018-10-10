@@ -1,7 +1,7 @@
 [general]
 name=QGIS map styling GeoPackage extension
 version=0.3.2
-qgisMinimumVersion=2.18
+qgisMinimumVersion=3.0
 author=Cédric Christen, Pirmin Kalberer, Joana Simoes, Paul van Genuchten
 email=pka@sourcepole.ch, joana.simoes@geocat.net
 description=Read and write QGIS project information in GeoPackages, using the QGIS or OWC geopackage extensions.
@@ -33,4 +33,3 @@ icon=write.png
 
 experimental=True
 deprecated=False
-

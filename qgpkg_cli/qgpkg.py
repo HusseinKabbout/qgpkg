@@ -29,7 +29,7 @@ def write(args):
 def read(args):
     gpkg = QGpkg_qgis(args.gpkg, log)
     project_path = gpkg.read(args.gpkg)
-    print "Project extracted: %s" % project_path
+    print("Project extracted: %s" % project_path)
     return 0
 
 
@@ -45,12 +45,12 @@ def main():
     # Common parameters
     gpkgparam = {
         'help': "input datagpkg"
-    }
+        }
     qgsparam = {
         'nargs': '?',
         'help': "output datagpkg",
         'default': sys.stdout
-    }
+        }
     parser.add_argument(
         '--debug', default=False, action='store_true',
         help='Display debugging information')

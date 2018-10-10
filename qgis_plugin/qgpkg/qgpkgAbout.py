@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 
-import os
+from qgis.PyQt import QtCore, QtWidgets
+from .ui_about_dialog import Ui_qgpkgDlg
 
-from PyQt4 import QtGui, QtCore
-from ui_about_dialog import Ui_qgpkgDlg
 
-class qgpkgAbout(QtGui.QDialog):
+class qgpkgAbout(QtWidgets.QDialog):
     def __init__(self, parent=None):
-        QtGui.QDialog.__init__(self, None)
-        self.setWindowFlags( self.windowFlags() & ~QtCore.Qt.WindowContextHelpButtonHint )
+        QtWidgets.QDialog.__init__(self, None)
+        self.setWindowFlags(
+            self.windowFlags() & ~QtCore.Qt.WindowContextHelpButtonHint)
 
         # Todo: add support for translation
         self._initGui(parent)

@@ -2,52 +2,39 @@
 
 # Form implementation generated from reading ui file 'ui_about_dialog.ui'
 #
-# Created by: PyQt4 UI code generator 4.11.4
+# Created by: PyQt5 UI code generator 5.9.1
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt4 import QtCore, QtGui
-
-try:
-    _fromUtf8 = QtCore.QString.fromUtf8
-except AttributeError:
-    def _fromUtf8(s):
-        return s
-
-try:
-    _encoding = QtGui.QApplication.UnicodeUTF8
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig, _encoding)
-except AttributeError:
-    def _translate(context, text, disambig):
-        return QtGui.QApplication.translate(context, text, disambig)
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_qgpkgDlg(object):
     def setupUi(self, qgpkgDlg):
-        qgpkgDlg.setObjectName(_fromUtf8("qgpkgDlg"))
+        qgpkgDlg.setObjectName("qgpkgDlg")
         qgpkgDlg.resize(456, 358)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/plugins/QgisGeopackage/about.png")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap(":/plugins/QgisGeopackage/about.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         qgpkgDlg.setWindowIcon(icon)
-        self.verticalLayout = QtGui.QVBoxLayout(qgpkgDlg)
-        self.verticalLayout.setObjectName(_fromUtf8("verticalLayout"))
-        self.textEdit = QtGui.QTextEdit(qgpkgDlg)
+        self.verticalLayout = QtWidgets.QVBoxLayout(qgpkgDlg)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.textEdit = QtWidgets.QTextEdit(qgpkgDlg)
         self.textEdit.setReadOnly(True)
-        self.textEdit.setObjectName(_fromUtf8("textEdit"))
+        self.textEdit.setObjectName("textEdit")
         self.verticalLayout.addWidget(self.textEdit)
-        self.button_box = QtGui.QDialogButtonBox(qgpkgDlg)
+        self.button_box = QtWidgets.QDialogButtonBox(qgpkgDlg)
         self.button_box.setOrientation(QtCore.Qt.Horizontal)
-        self.button_box.setStandardButtons(QtGui.QDialogButtonBox.Close)
-        self.button_box.setObjectName(_fromUtf8("button_box"))
+        self.button_box.setStandardButtons(QtWidgets.QDialogButtonBox.Close)
+        self.button_box.setObjectName("button_box")
         self.verticalLayout.addWidget(self.button_box)
 
         self.retranslateUi(qgpkgDlg)
-        QtCore.QObject.connect(self.button_box, QtCore.SIGNAL(_fromUtf8("accepted()")), qgpkgDlg.accept)
-        QtCore.QObject.connect(self.button_box, QtCore.SIGNAL(_fromUtf8("rejected()")), qgpkgDlg.reject)
+        self.button_box.accepted.connect(qgpkgDlg.accept)
+        self.button_box.rejected.connect(qgpkgDlg.reject)
         QtCore.QMetaObject.connectSlotsByName(qgpkgDlg)
 
     def retranslateUi(self, qgpkgDlg):
-        qgpkgDlg.setWindowTitle(_translate("qgpkgDlg", "QGIS map project GeoPackage extension", None))
+        _translate = QtCore.QCoreApplication.translate
+        qgpkgDlg.setWindowTitle(_translate("qgpkgDlg", "QGIS map project GeoPackage extension"))
         self.textEdit.setHtml(_translate("qgpkgDlg", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
 "p, li { white-space: pre-wrap; }\n"
@@ -61,5 +48,5 @@ class Ui_qgpkgDlg(object):
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Ubuntu\'; font-size:9pt;\">Currently, writing is only supported using the qgis geopackage extension.</span></p>\n"
 "<p style=\"-qt-paragraph-type:empty; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px; font-family:\'Ubuntu\'; font-size:9pt;\"><br /></p>\n"
 "<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Ubuntu\'; font-size:9pt;\">Authors: Cedric Christen, Pirmin Kalberer (pka@sourcepole.ch), Joana Simoes (joana.simoes@geocat.net), Paul van Genuchten</span></p>\n"
-"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Ubuntu\'; font-size:9pt;\">from SourcePole and GeoCat</span></p></body></html>", None))
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-family:\'Ubuntu\'; font-size:9pt;\">from SourcePole and GeoCat</span></p></body></html>"))
 

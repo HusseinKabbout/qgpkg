@@ -7,17 +7,20 @@ import logging
 
 logger = logging.getLogger('qgpkg')
 
+
 class QGpkg:
     """Base class for handling data and style information within a GeoPackage database file"""
 
-    def read(self, gpkg_path): pass
+    def read(self, gpkg_path):
+        pass
     """Abstract method to read a QGIS project from geopackage.
 
     Args:
         gpkg_path: The geopackage path on disk.
     """
 
-    def write(self, project_path): pass
+    def write(self, project_path):
+        pass
     """Abstract method to write a QGIS project into a geopackage.
 
     Args:
@@ -67,7 +70,8 @@ class QGpkg:
             self.log(logging.ERROR, "GeoPackage access error: ", e.args[0])
 
         try:
-            rows = list(cur.execute('''SELECT extension_name FROM gpkg_extensions'''))
+            rows = list(cur.execute(
+                '''SELECT extension_name FROM gpkg_extensions'''))
             if len(rows) > 0:
                 print("GPKG extensions:")
                 for row in rows:
@@ -85,7 +89,8 @@ class QGpkg:
             pass
 
         try:
-            rows = list(cur.execute('''SELECT name, mime_type FROM qgis_resources'''))
+            rows = list(cur.execute(
+                '''SELECT name, mime_type FROM qgis_resources'''))
             if len(rows) > 0:
                 print("QGIS recources:")
                 for row in rows:

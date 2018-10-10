@@ -20,8 +20,8 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python :: 2',
         'Topic :: Scientific/Engineering :: GIS',
-    ],
+        ],
     entry_points={
         'console_scripts': ['ogr = gpkg_cli.gpkg:main'],
-    }
+        }
     )
