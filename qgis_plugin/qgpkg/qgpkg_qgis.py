@@ -195,7 +195,8 @@ class QGpkg_qgis(QGpkg):
                         else:
                             layer_element.text += "|" + layer_info[i]
                 elif len(layer_info) == 1:
-                    layer_element.text = layer_path
+                    if "type=xyz" not in layer_element.text:
+                        layer_element.text = layer_path
                 self.log(logging.DEBUG,
                          u"Layerpath from layer %s was adjusted." %
                          layer.find("layername").text)
