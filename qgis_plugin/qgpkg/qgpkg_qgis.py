@@ -83,6 +83,8 @@ class QGpkg_qgis(QGpkg):
                 for layout_picture in lay.findall("LayoutItem"):
                     if "file" in layout_picture.attrib:
                         img = layout_picture.attrib['file']
+                        if not img:
+                            continue
                         if img not in images:
                             self.log(logging.DEBUG, u"Image found: %s" % img)
                             images.append(img)
@@ -127,29 +129,40 @@ class QGpkg_qgis(QGpkg):
             self.log(logging.DEBUG, u"Project %s saved." % project_name)
         else:
             # Overwrite existing project (DELETE gives locking problems)
-            self.c.execute('UPDATE qgis_projects SET xml=? WHERE name=?',
-                           (project_xml, project_name))
-            self.log(logging.INFO, u"Project overwritten.")
+            try:
+                self.c.execute('UPDATE qgis_projects SET xml=? WHERE name=?',
+                               (project_xml, project_name))
+                self.log(logging.INFO, u"Project overwritten.")
+            except sqlite3.OperationalError:
+                self.log(logging.INFO, u"The database is locked. Please try"
+                         "again.")
 
         if images:
             for image in images:
                 img = self.make_path_absolute(image, project_path)
-                with open(img, 'rb') as input_file:
-                    blob = input_file.read()
-                    mime_type = mimetypes.MimeTypes().guess_type(image)[0]
-                    self.c.execute(
-                        'SELECT count(1) FROM qgis_resources WHERE name=?',
-                        (image,))
-                    if self.c.fetchone()[0] == 0:
-                        self.conn.execute(
-                            """INSERT INTO qgis_resources \
-                            VALUES(?, ?, ?)""", (image, mime_type,
-                                                 sqlite3.Binary(blob)))
-                        self.log(logging.DEBUG, u"Image %s was saved" % image)
-                    else:
-                        # TODO: forced overwrite
-                        self.log(logging.DEBUG,
-                                 u"Skipping existing image %s" % image)
+                try:
+                    with open(img, 'rb') as input_file:
+                        blob = input_file.read()
+                except FileNotFoundError:
+                    self.log(
+                        logging.INFO,
+                        "Picture with the path {0} not found".format(
+                            image))
+                    continue
+                mime_type = mimetypes.MimeTypes().guess_type(image)[0]
+                self.c.execute(
+                    'SELECT count(1) FROM qgis_resources WHERE name=?',
+                    (image,))
+                if self.c.fetchone()[0] == 0:
+                    self.conn.execute(
+                        """INSERT INTO qgis_resources \
+                        VALUES(?, ?, ?)""", (image, mime_type,
+                                             sqlite3.Binary(blob)))
+                    self.log(logging.DEBUG, u"Image %s was saved" % image)
+                else:
+                    # TODO: forced overwrite
+                    self.log(logging.DEBUG,
+                             u"Skipping existing image %s" % image)
         self.conn.commit()
 
         return gpkg_path
@@ -207,6 +220,8 @@ class QGpkg_qgis(QGpkg):
             for lay in layout:
                 for layout_picture in lay.findall("LayoutItem"):
                     if "file" in layout_picture.attrib:
+                        if not layout_picture.attrib['file']:
+                            continue
                         images.append(layout_picture.attrib['file'])
                         layout_picture.set("file", "./" + os.path.basename(
                             layout_picture.attrib['file']))
